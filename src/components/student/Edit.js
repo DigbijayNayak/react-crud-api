@@ -1,28 +1,23 @@
-import { Typography, Box, Grid, TextField, Button, Link } from "@mui/material";
+import { Typography, Box, Grid, TextField, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import List from "../student/List";
-// export const useStyles = makeStyles({
-//   headingColor: {
-//     backgroundColor: deepPurple[400],
-//     color: "white",
-//   },
-// });
+// import List from "../student/List";
 const Edit = () => {
-  //   const classes = useStyles();
 
+  const studentobj = new Object();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [student, setStudent] = useState(studentobj);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [student, setStudent] = useState({
-    stuname: "",
-    email: "",
-  });
+
+
   useEffect(() => {
     async function getStudent() {
       try {
         const student = await axios.get(
-          `https://crudcrud.com/api/3197231c0a2f4a3d9828b109d339d6b9${id}`
+          `https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`
         );
         // console.log(student.data);
         setStudent(student.data);
@@ -33,19 +28,14 @@ const Edit = () => {
     getStudent();
   }, [id]);
 
-  function onTextFieldChange(e) {
-    setStudent({
-      ...student,
-      [e.target.name]: e.target.value,
-    });
-  }
-
   async function onFormSubmit(e) {
     e.preventDefault();
+    studentobj.name = name;
+    studentobj.email = email;
     try {
       await axios.put(
-        `https://crudcrud.com/api/3197231c0a2f4a3d9828b109d339d6b9/${id}`,
-        student
+        `https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`,
+        studentobj
       );
       navigate("/", { replace: true });
     } catch (error) {
@@ -80,7 +70,7 @@ const Edit = () => {
                   id="id"
                   label="ID"
                   autoFocus
-                  value="1"
+                  value={id}
                   disabled
                 ></TextField>
               </Grid>
@@ -96,9 +86,9 @@ const Edit = () => {
                   fullWidth
                   id="stuname"
                   label="Name"
-                  value={student.stuname}
+                  value={student.name}
                   autoFocus
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => setName(e.target.value)}
                 ></TextField>
               </Grid>
             </Grid>
@@ -114,7 +104,7 @@ const Edit = () => {
                   id="email"
                   label="Email Address"
                   value={student.email}
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => setEmail(e.target.value)}
                   autoFocus
                 ></TextField>
               </Grid>

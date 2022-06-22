@@ -1,48 +1,28 @@
-import { Typography, Box, Grid, TextField, Button, Link } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
+import { Typography, Box, Grid, TextField, Button} from "@mui/material";
 import List from "../student/List";
 
 import axios from "axios";
 
 import { useState } from "react";
-// export const useStyles = makeStyles({
-//   headingColor: {
-//     backgroundColor: deepPurple[400],
-//     color: "white",
-//   },
-// });
+
 const Home = () => {
   //   const classes = useStyles();
-  const [student, setStudent] = useState({
-    student: "",
-    email: "",
-  });
-
+  const student = new Object();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState();
-
-  function onTextFieldChange(e) {
-    setStudent({
-      ...student,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  //   function onNameChange() {
-  //     setStudent({
-  //       stuname: e.target.value,
-  //     });
-  //   }
 
   async function onFormSubmit(e) {
     e.preventDefault();
+    student.name = name;
+    student.email = email;
+    console.log(student);
     try {
       await axios.post(
-        `https://crudcrud.com/api/3197231c0a2f4a3d9828b109d339d6b9`,
+        "https://crudcrud.com/b7364a6bda2941f08f394fc73663a066/student",
         student
       );
       setStatus(true);
-      //   console.log(student.data);
-      //   setStudent(student.data);
     } catch (error) {
       console.log("Something is Wrong");
     }
@@ -64,25 +44,25 @@ const Home = () => {
               Add Student
             </Typography>
           </Box>
-          <form noValidate>
+          <form>
             <Grid container spacing={2} mb={2}>
-              <Grid item xs={12}>
+              <Grid item xs={11} ml={3}>
                 <TextField
-                  autoComplete="stuname"
-                  name="stuname"
+                  autoComplete="name"
+                  name="name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="stuname"
+                  id="name"
                   label="Name"
                   autoFocus
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => setName(e.target.value)}
                 ></TextField>
               </Grid>
             </Grid>
 
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={11} ml={3}>
                 <TextField
                   autoComplete="email"
                   name="email"
@@ -92,7 +72,7 @@ const Home = () => {
                   id="email"
                   label="Email Address"
                   autoFocus
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => setEmail(e.target.value)}
                 ></TextField>
               </Grid>
             </Grid>
@@ -103,7 +83,7 @@ const Home = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
-                onClick={(e) => onFormSubmit()}
+                onClick={(e) => onFormSubmit(e)}
               >
                 Add
               </Button>

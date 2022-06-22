@@ -18,7 +18,6 @@ import {
   IconButton,
   Tooltip,
 } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
 
 const List = () => {
   const [students, setStudents] = useState([]);
@@ -29,14 +28,24 @@ const List = () => {
   async function getAllStudent() {
     try {
       const students = await axios.get(
-        "https://crudcrud.com/api/3197231c0a2f4a3d9828b109d339d6b9"
+        "https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student"
       );
-      //   console.log(students.data);
       setStudents(students.data);
+      console.log(students.data);
     } catch (error) {
       console.log("Something is Wrong");
     }
   }
+
+  const handleDelete = async id => {
+    await axios.delete(`https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`);
+    var newstudent = students.filter((item) => {
+     // console.log(item);
+     return item.id !== id;
+    })
+    setStudents(newstudent);
+   }
+
   return (
     <div>
       <Box textAlign="center" p={2}>
@@ -60,12 +69,12 @@ const List = () => {
               return (
                 <TableRow key={i}>
                   <TableCell align="center">{i}</TableCell>
-                  <TableCell align="center">{student.stuname}</TableCell>
+                  <TableCell align="center">{student.name}</TableCell>
                   <TableCell align="center">{student.email}</TableCell>
                   <TableCell>
                     <Tooltip title="View">
                       <IconButton>
-                        <Link to={`/view/${student.id}`}>
+                        <Link to={`/view/${student._id}`}>
                           <VisibilityIcon color="primary" />
                         </Link>
                       </IconButton>
@@ -73,14 +82,14 @@ const List = () => {
 
                     <Tooltip title="Edit">
                       <IconButton>
-                        <Link to={`/edit/${student.id}`}>
+                        <Link to={`/edit/${student._id}`}>
                           <EditIcon />
                         </Link>
                       </IconButton>
                     </Tooltip>
 
                     <Tooltip title="Delete">
-                      <IconButton>
+                      <IconButton onClick={() => handleDelete(student._id)}>
                         <Delete color="secondary" />
                       </IconButton>
                     </Tooltip>

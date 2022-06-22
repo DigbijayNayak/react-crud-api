@@ -21,7 +21,7 @@ import {
   Link,
   Button,
 } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
+
 
 const View = () => {
   const { id } = useParams();
@@ -29,24 +29,33 @@ const View = () => {
   const [student, setStudent] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
+    async function getStudent() {
+      try {
+        const student = await axios.get(
+          `https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`
+        );
+        //   console.log(student.data);
+        setStudent(student.data);
+      } catch (error) {
+        console.log("Something is Wrong");
+      }
+    }
     getStudent();
   }, [id]);
 
-  async function getStudent() {
-    try {
-      const student = await axios.get(
-        `https://crudcrud.com/api/3197231c0a2f4a3d9828b109d339d6b9/${id}`
-      );
-      //   console.log(student.data);
-      setStudent(student.data);
-    } catch (error) {
-      console.log("Something is Wrong");
-    }
-  }
+  
 
   function handleClick() {
     navigate("/");
   }
+  const handleDelete = async id => {
+    await axios.delete(`https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`);
+    var newstudent = student.filter((item) => {
+     // console.log(item);
+     return item.id !== id;
+    })
+    setStudent(newstudent);
+   }
   return (
     <div>
       <Box textAlign="center" p={2}>
@@ -58,7 +67,7 @@ const View = () => {
         <Table>
           <TableHead style={{ backgroundColor: "#616161" }}>
             <TableRow>
-              <TableCell align="center">No</TableCell>
+              <TableCell align="center">ID</TableCell>
               <TableCell align="center">Name</TableCell>
               <TableCell align="center">Email</TableCell>
               <TableCell align="center">Action</TableCell>
@@ -67,27 +76,27 @@ const View = () => {
 
           <TableBody>
             <TableRow>
-              <TableCell align="center">{student.id}</TableCell>
-              <TableCell align="center">{student.stuname}</TableCell>
+              <TableCell align="center">{student._id}</TableCell>
+              <TableCell align="center">{student.name}</TableCell>
               <TableCell align="center">{student.email}</TableCell>
               <TableCell>
-                <Tooltip>
+                <Tooltip title="view">
                   <IconButton>
-                    <Link to="/view/1" />
+                    <Link to={`/view/${student._id}`} />
                     <VisibilityIcon color="primary" />
                   </IconButton>
                 </Tooltip>
 
-                <Tooltip>
+                <Tooltip title="edit">
                   <IconButton>
-                    <Link to="/edit/1">
+                    <Link to={`/edit/${student._id}`}>
                       <EditIcon />
                     </Link>
                   </IconButton>
                 </Tooltip>
 
                 <Tooltip title="Delete">
-                  <IconButton>
+                  <IconButton onClick={() => handleDelete(student._id)}>
                     <Delete color="secondary" />
                   </IconButton>
                 </Tooltip>
