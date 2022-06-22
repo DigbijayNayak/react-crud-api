@@ -37,6 +37,11 @@ const List = () => {
       console.log("Something is Wrong");
     }
   }
+
+  //   const handleDelete = async id => {
+  //     await axios.delete(`https://crudcrud.com/api/3197231c0a2f4a3d9828b109d339d6b9/${id}`);
+  //   }
+
   return (
     <div>
       <Box textAlign="center" p={2}>
