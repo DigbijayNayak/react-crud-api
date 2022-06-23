@@ -32,7 +32,7 @@ const View = () => {
     async function getStudent() {
       try {
         const student = await axios.get(
-          `https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`
+          `https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student/${id}`
         );
         //   console.log(student.data);
         setStudent(student.data);
@@ -49,7 +49,7 @@ const View = () => {
     navigate("/");
   }
   const handleDelete = async id => {
-    await axios.delete(`https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`);
+    await axios.delete(`https://crudcrud.com/api/6999a68bc15749aba3177fd10d64e316/student/${id}`);
     var newstudent = student.filter((item) => {
      // console.log(item);
      return item.id !== id;
@@ -59,13 +59,13 @@ const View = () => {
   return (
     <div>
       <Box textAlign="center" p={2}>
-        <Typography variant="h4" style={{ backgroundColor: "#616161" }}>
+        <Typography variant="h4" style={{ backgroundColor: "#291a05", color: 'white'}}>
           Student List
         </Typography>
       </Box>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{marginLeft: "16px", width: "98%"}}>
         <Table>
-          <TableHead style={{ backgroundColor: "#616161" }}>
+          <TableHead style={{ backgroundColor: "#4f4537" }}>
             <TableRow>
               <TableCell align="center">ID</TableCell>
               <TableCell align="center">Name</TableCell>

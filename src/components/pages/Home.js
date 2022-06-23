@@ -19,8 +19,12 @@ const Home = () => {
     console.log(student);
     try {
       await axios.post(
-        "https://crudcrud.com/b7364a6bda2941f08f394fc73663a066/student",
-        student
+        `https://crudcrud.com/6999a68bc15749aba3177fd10d64e316/student`,
+        JSON.stringify(student), {
+          headers: {
+            'Content_Type': 'application/json; charset=utf-8'
+          }
+        }
       );
       setStatus(true);
     } catch (error) {
@@ -34,19 +38,20 @@ const Home = () => {
   return (
     <>
       <Box textAlign="center" p={2} mb={2}>
-        <Typography variant="h2">React CRUD with API Call</Typography>
+        <Typography variant="h2" style={{ backgroundColor: "#291a05", color: 'white' }}>React CRUD With API Call</Typography>
       </Box>
 
       <Grid container justify="center" spacing={4}>
-        <Grid item md={6} xs={12}>
-          <Box textAlign="center" p={2} mb={2}>
-            <Typography variant="h4" style={{ backgroundColor: "#616161" }}>
+        <Grid md={2}></Grid>
+        <Grid item md={4} xs={6}>
+          <Box textAlign="center" p={2}>
+            <Typography variant="h4" style={{ backgroundColor: "#574226", color: "white" }}>
               Add Student
             </Typography>
           </Box>
           <form>
-            <Grid container spacing={2} mb={2}>
-              <Grid item xs={11} ml={3}>
+            <Grid container spacing={2} mb={1}>
+              <Grid item xs={11} style={{marginLeft: "19px"}}>
                 <TextField
                   autoComplete="name"
                   name="name"
@@ -62,7 +67,7 @@ const Home = () => {
             </Grid>
 
             <Grid container spacing={2}>
-              <Grid item xs={11} ml={3}>
+              <Grid item xs={11} style={{marginLeft: "19px"}}>
                 <TextField
                   autoComplete="email"
                   name="email"
@@ -81,9 +86,9 @@ const Home = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
                 fullWidth
                 onClick={(e) => onFormSubmit(e)}
+                style={{backgroundColor: "#141311", color: "white"}}
               >
                 Add
               </Button>
@@ -91,8 +96,11 @@ const Home = () => {
           </form>
         </Grid>
 
-        <Grid item md={6} xs={12}>
+        <Grid item md={4} xs={12}>
           <List />
+        </Grid>
+
+        <Grid md={2}>
         </Grid>
       </Grid>
     </>

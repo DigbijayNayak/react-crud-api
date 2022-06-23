@@ -17,7 +17,7 @@ const Edit = () => {
     async function getStudent() {
       try {
         const student = await axios.get(
-          `https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`
+          `https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student/${id}`
         );
         // console.log(student.data);
         setStudent(student.data);
@@ -34,7 +34,7 @@ const Edit = () => {
     studentobj.email = email;
     try {
       await axios.put(
-        `https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`,
+        `https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student/${id}`,
         studentobj
       );
       navigate("/", { replace: true });
@@ -48,13 +48,14 @@ const Edit = () => {
   return (
     <>
       <Box textAlign="center" p={2} mb={2}>
-        <Typography variant="h2">React Edit with API Call</Typography>
+        <Typography variant="h2" style={{ backgroundColor: "#291a05", color: 'white' }}>React Edit with API Call</Typography>
       </Box>
-
+      
       <Grid container justify="center" spacing={4}>
-        <Grid item md={6} xs={12}>
+      <Grid md={4}></Grid>
+        <Grid item md={4} xs={12}>
           <Box textAlign="center" p={2} mb={2}>
-            <Typography variant="h4" style={{ backgroundColor: "#616161" }}>
+            <Typography variant="h4" style={{ backgroundColor: "#616161", color: "white" }}>
               Add Student
             </Typography>
           </Box>

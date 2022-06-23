@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import {
   Typography,
   Box,
+  Grid,
   TableContainer,
   Table,
   TableBody,
@@ -22,23 +23,24 @@ import {
 const List = () => {
   const [students, setStudents] = useState([]);
   useEffect(() => {
+    async function getAllStudent() {
+      try {
+        const students = await axios.get(
+          "https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student"
+        );
+        setStudents(students.data);
+        console.log(students.data);
+      } catch (error) {
+        console.log("Something is Wrong");
+      }
+    }
     getAllStudent();
   }, []);
 
-  async function getAllStudent() {
-    try {
-      const students = await axios.get(
-        "https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student"
-      );
-      setStudents(students.data);
-      console.log(students.data);
-    } catch (error) {
-      console.log("Something is Wrong");
-    }
-  }
+  
 
   const handleDelete = async id => {
-    await axios.delete(`https://crudcrud.com/api/b7364a6bda2941f08f394fc73663a066/student/${id}`);
+    await axios.delete(`https://crudcrud.com/api/6999a68bc15749aba3177fd10d64e316/${id}`);
     var newstudent = students.filter((item) => {
      // console.log(item);
      return item.id !== id;
@@ -49,13 +51,13 @@ const List = () => {
   return (
     <div>
       <Box textAlign="center" p={2}>
-        <Typography variant="h4" style={{ backgroundColor: "#616161" }}>
+        <Typography variant="h4" style={{ backgroundColor: "#574226", width:"500px", color: "white" }}>
           Student List
         </Typography>
       </Box>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{width: "500px", marginLeft: "16px"}}>
         <Table>
-          <TableHead style={{ backgroundColor: "#616161" }}>
+          <TableHead style={{ backgroundColor: "#4f4537" }}>
             <TableRow>
               <TableCell align="center">No</TableCell>
               <TableCell align="center">Name</TableCell>
