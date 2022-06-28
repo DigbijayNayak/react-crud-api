@@ -17,7 +17,7 @@ const Edit = () => {
     async function getStudent() {
       try {
         const student = await axios.get(
-          `https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student/${id}`
+          `https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student/${id}`
         );
         // console.log(student.data);
         setStudent(student.data);
@@ -34,7 +34,7 @@ const Edit = () => {
     studentobj.email = email;
     try {
       await axios.put(
-        `https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student/${id}`,
+        `https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student/${id}`,
         studentobj
       );
       navigate("/", { replace: true });
@@ -48,20 +48,20 @@ const Edit = () => {
   return (
     <>
       <Box textAlign="center" p={2} mb={2}>
-        <Typography variant="h2" style={{ backgroundColor: "#291a05", color: 'white' }}>React Edit with API Call</Typography>
+        <Typography variant="h2" style={{ backgroundColor: "#3f2a0d", color: 'white' }}>React Edit with API Call</Typography>
       </Box>
       
       <Grid container justify="center" spacing={4}>
       <Grid md={4}></Grid>
-        <Grid item md={4} xs={12}>
-          <Box textAlign="center" p={2} mb={2}>
-            <Typography variant="h4" style={{ backgroundColor: "#616161", color: "white" }}>
-              Add Student
+        <Grid item md={4}>
+          <form noValidate>
+          <Box textAlign="center" p={2} mb={2} style={{width: "500px"}}>
+            <Typography variant="h4" style={{ backgroundColor: "#574226", color: "white", margin: "auto"}}>
+              Edit Student
             </Typography>
           </Box>
-          <form noValidate>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="id"
                   name="id"
@@ -72,12 +72,13 @@ const Edit = () => {
                   label="ID"
                   autoFocus
                   value={id}
+                  style={{marginLeft: "20px"}}
                   disabled
                 ></TextField>
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} mb={2}>
+            <Grid container spacing={2} mb={2} mt={2}>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="stuname"
@@ -88,6 +89,7 @@ const Edit = () => {
                   id="stuname"
                   label="Name"
                   value={student.name}
+                  style={{marginLeft: "20px"}}
                   autoFocus
                   onChange={(e) => setName(e.target.value)}
                 ></TextField>
@@ -104,6 +106,7 @@ const Edit = () => {
                   fullWidth
                   id="email"
                   label="Email Address"
+                  style={{marginLeft: "20px"}}
                   value={student.email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoFocus
@@ -115,16 +118,16 @@ const Edit = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
                 fullWidth
                 onClick={(e) => onFormSubmit(e)}
+                style={{backgroundColor: "#141311", width: "485px"}}
               >
                 Update
               </Button>
             </Box>
           </form>
           <Box m={3} textAlign="center">
-            <Button variant="conatined" color="primary" onClick={handleClick}>
+            <Button variant="conatined" style={{backgroundColor: "blue"}} onClick={handleClick}>
               Back to Home
             </Button>
           </Box>

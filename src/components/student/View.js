@@ -32,7 +32,7 @@ const View = () => {
     async function getStudent() {
       try {
         const student = await axios.get(
-          `https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student/${id}`
+          `https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student/${id}`
         );
         //   console.log(student.data);
         setStudent(student.data);
@@ -49,7 +49,7 @@ const View = () => {
     navigate("/");
   }
   const handleDelete = async id => {
-    await axios.delete(`https://crudcrud.com/api/6999a68bc15749aba3177fd10d64e316/student/${id}`);
+    await axios.delete(`https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student/${id}`);
     var newstudent = student.filter((item) => {
      // console.log(item);
      return item.id !== id;

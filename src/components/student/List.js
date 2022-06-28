@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import {
   Typography,
   Box,
-  Grid,
   TableContainer,
   Table,
   TableBody,
@@ -26,7 +25,7 @@ const List = () => {
     async function getAllStudent() {
       try {
         const students = await axios.get(
-          "https://crudcrud.com/api/6d07b477ad9c487a8c78c7523e4b1682/student"
+          "https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student"
         );
         setStudents(students.data);
         console.log(students.data);
@@ -40,7 +39,7 @@ const List = () => {
   
 
   const handleDelete = async id => {
-    await axios.delete(`https://crudcrud.com/api/6999a68bc15749aba3177fd10d64e316/${id}`);
+    await axios.delete(`https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/${id}`);
     var newstudent = students.filter((item) => {
      // console.log(item);
      return item.id !== id;
@@ -73,7 +72,7 @@ const List = () => {
                   <TableCell align="center">{i}</TableCell>
                   <TableCell align="center">{student.name}</TableCell>
                   <TableCell align="center">{student.email}</TableCell>
-                  <TableCell>
+                  <TableCell style={{display: "flex"}}>
                     <Tooltip title="View">
                       <IconButton>
                         <Link to={`/view/${student._id}`}>
