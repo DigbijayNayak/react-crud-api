@@ -18,11 +18,14 @@ const Home = () => {
     student.email = email;
     console.log(student);
     try {
-      fetch("https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student", {
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        method: "POST",
-        body: JSON.stringify(student),
-      }).then((response) => response.json());
+      fetch(
+        "https://crudcrud.com/api/0d4cfc2d41644021a5fee79be52a4c19/student",
+        {
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          method: "POST",
+          body: JSON.stringify(student),
+        }
+      ).then((response) => response.json());
       setStatus(true);
       // await axios.post(
       //   `https://crudcrud.com/6999a68bc15749aba3177fd10d64e316/student`,
@@ -106,6 +109,7 @@ const Home = () => {
               <Button
                 type="submit"
                 variant="contained"
+                id="btn"
                 fullWidth
                 onClick={(e) => onFormSubmit(e)}
                 style={{

@@ -25,7 +25,7 @@ const List = () => {
     async function getAllStudent() {
       try {
         const students = await axios.get(
-          "https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/student"
+          "https://crudcrud.com/api/0d4cfc2d41644021a5fee79be52a4c19/student"
         );
         setStudents(students.data);
         console.log(students.data);
@@ -36,25 +36,31 @@ const List = () => {
     getAllStudent();
   }, []);
 
-  
-
-  const handleDelete = async id => {
-    await axios.delete(`https://crudcrud.com/api/13330f0d5c1c42728715e7f0360a26b3/${id}`);
+  const handleDelete = async (id) => {
+    await axios.delete(
+      `https://crudcrud.com/api/0d4cfc2d41644021a5fee79be52a4c19/${id}`
+    );
     var newstudent = students.filter((item) => {
-     // console.log(item);
-     return item.id !== id;
-    })
+      // console.log(item);
+      return item.id !== id;
+    });
     setStudents(newstudent);
-   }
+  };
 
   return (
     <div>
       <Box textAlign="center" p={2}>
-        <Typography variant="h4" style={{ backgroundColor: "#574226", width:"500px", color: "white" }}>
+        <Typography
+          variant="h4"
+          style={{ backgroundColor: "#574226", width: "500px", color: "white" }}
+        >
           Student List
         </Typography>
       </Box>
-      <TableContainer component={Paper} style={{width: "500px", marginLeft: "16px"}}>
+      <TableContainer
+        component={Paper}
+        style={{ width: "500px", marginLeft: "16px" }}
+      >
         <Table>
           <TableHead style={{ backgroundColor: "#4f4537" }}>
             <TableRow>
@@ -70,13 +76,15 @@ const List = () => {
               return (
                 <TableRow key={i}>
                   <TableCell align="center">{i}</TableCell>
-                  <TableCell align="center">{student.name}</TableCell>
+                  <TableCell align="center" id="data">
+                    {student.name}
+                  </TableCell>
                   <TableCell align="center">{student.email}</TableCell>
-                  <TableCell style={{display: "flex"}}>
+                  <TableCell style={{ display: "flex" }}>
                     <Tooltip title="View">
                       <IconButton>
                         <Link to={`/view/${student._id}`}>
-                          <VisibilityIcon color="primary" />
+                          <VisibilityIcon color="primary" id="view" />
                         </Link>
                       </IconButton>
                     </Tooltip>
@@ -91,7 +99,7 @@ const List = () => {
 
                     <Tooltip title="Delete">
                       <IconButton onClick={() => handleDelete(student._id)}>
-                        <Delete color="secondary" />
+                        <Delete color="secondary" id="delete" />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
